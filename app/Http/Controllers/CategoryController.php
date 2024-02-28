@@ -19,7 +19,7 @@ class CategoryController extends Controller
             ],
         );
         if($validate->fails()){
-            return response()->json(['error'=>$validate->errors()->all()],409);
+            return response()->json(['error'=>$validate->errors()->all()]);
         }
         $c = new Category();
         $c->category_name = $request->category_name;

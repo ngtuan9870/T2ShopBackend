@@ -493,7 +493,7 @@ class WarehouseController extends Controller
         return response()->json(['message'=>'success']);
     }
     public function getBallotExport(){
-        $bes = BallotExport::all();
+        $bes = BallotExport::orderBy('created_at', 'DESC')->get();
         return response()->json(['message'=>'success', 'bes'=>$bes]);
     }
     public function getAllDBEByBEID(Request $request){
@@ -514,7 +514,7 @@ class WarehouseController extends Controller
     }
     public function getAllDWHP(Request $request){
         $dbi = DetailBallotImport::join('ballotimports','detail_ballot_import.bi_id','=','ballotimports.bi_id')->where('detail_ballot_import.product_id',$request->product_id)
-        ->where('ballotimports.warehouse_id',$request->wh_id)->get();
+        ->where('ballotimports.warehouse_id',$request->wh_id)->orderBy('ballotimports.created_at', 'DESC')->get();
         return response()->json(['message'=>'success', 'dbi'=>$dbi]);
     }
 }

@@ -85,7 +85,7 @@ class ShipperController extends Controller
         }
     }
     public function showorders(){
-        $orders=Order::where([['status','=',0],['ready','=',1],['ship','=','0']])->get();
+        $orders=Order::where([['status','=',0],['ready','=',1],['ship','=','0']])->orderBy('created_at','DESC')->get();
         return response()->json(['orders'=>$orders]);
     }
     public function addShip(Request $request){
@@ -146,7 +146,6 @@ class ShipperController extends Controller
         return response()->json(['ships'=>$ships,'orders'=>$orders]);
     }
     public function forgot(Request $request){
-
         $request = new Request();
         $request->setUrl('https://d7sms.p.rapidapi.com/secure/send');
         $request->setMethod(HTTP_METH_POST);
